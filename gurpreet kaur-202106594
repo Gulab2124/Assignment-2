@@ -1,0 +1,232 @@
+Exercise 1: The Secret Entrance
+
+public class SecretEntrance {
+    public static int[] crackCode() {
+        int[] code = new int[4];
+
+        for (int a = 1; a <= 9; a++) {
+            for (int b = 1; b <= 9; b++) {
+                for (int c = 1; c <= 9; c++) {
+                    for (int d = 1; d <= 9; d++) {
+                        if (a != b && a != c && a != d && b != c && b != d && c != d && (a * b * c * d) == 24) {
+                            code[0] = a;
+                            code[1] = b;
+                            code[2] = c;
+                            code[3] = d;
+                            return code;
+                        }
+                    }
+                }
+            }
+        }
+        return null; // Return null if no valid code is found
+    }
+}
+
+Exercise 2: Laser Hallway
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LaserHallway {
+    public static List<String> findPath(int[][] hallway) {
+        List<String> path = new ArrayList<>();
+        int rows = hallway.length;
+        int cols = hallway[0].length;
+
+        // Create a 2D array to store the optimal path
+        String[][] optimalPaths = new String[rows][cols];
+
+        // Initialize the top-left cell
+        optimalPaths[0][0] = "";
+
+        // Fill the first row (only right movements allowed)
+        for (int col = 1; col < cols; col++) {
+            if (hallway[0][col] == 0 && optimalPaths[0][col - 1] != null) {
+                optimalPaths[0][col] = optimalPaths[0][col - 1] + "R";
+            }
+        }
+
+        // Fill the first column (only down movements allowed)
+        for (int row = 1; row < rows; row++) {
+            if (hallway[row][0] == 0 && optimalPaths[row - 1][0] != null) {
+                optimalPaths[row][0] = optimalPaths[row - 1][0] + "D";
+            }
+        }
+
+        // Fill the rest of the cells
+        for (int row = 1; row < rows; row++) {
+            for (int col = 1; col < cols; col++) {
+                if (hallway[row][col] == 0) {
+                    String rightPath = optimalPaths[row][col - 1];
+                    String downPath = optimalPaths[row - 1][col];
+
+                    if (rightPath != null && downPath != null) {
+                        // Choose the shorter path between right and down
+                        if (rightPath.length() < downPath.length()) {
+                            optimalPaths[row][col] = rightPath + "R";
+                        } else {
+                            optimalPaths[row][col] = downPath + "D";
+                        }
+                    } else if (rightPath != null) {
+                        optimalPaths[row][col] = rightPath + "R";
+                    } else if (downPath != null) {
+                        optimalPaths[row][col] = downPath + "D";
+                    }
+                }
+            }
+        }
+
+        // If the bottom-right cell is not null, there is a valid path
+        if (optimalPaths[rows - 1][cols - 1] != null) {
+            String pathString = optimalPaths[rows - 1][cols - 1];
+            for (char direction : pathString.toCharArray()) {
+                path.add(String.valueOf(direction));
+            }
+        }
+
+        return path;
+    }
+}
+
+Exercise 3: Safe Crack
+
+public class SafeCracker {
+    public static void crackSafe() {
+        for (int first = 0; first <= 99; first++) {
+            for (int second = 0; second <= 99; second++) {
+                int third = first - second;
+                if (third >= 0 && third <= 99 && first == (second + third)) {
+                    System.out.println("Cracking the safe...");
+                    System.out.println("First number: " + first);
+                    System.out.println("Second number: " + second);
+                    System.out.println("Third number: " + third);
+                    System.out.println("Sequence of rotations: RRRLLR");
+                    return; // Stop after finding the correct combination
+                }
+            }
+        }
+        System.out.println("Unable to crack the safe. The peculiar property is not satisfied.");
+    }
+}
+
+Lesson 1: Setting up the Scenario
+
+class AgentPeanut {
+    String name;
+    String mission;
+    
+    public AgentPeanut(String name, String mission) {
+        this.name = name;
+        this.mission = mission;
+    }
+}
+
+class HerrWolf {
+    String name;
+    String fortress;
+    
+    public HerrWolf(String name, String fortress) {
+        this.name = name;
+        this.fortress = fortress;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+
+    }
+}
+
+Lesson 2: Navigating the Labyrinth
+
+public class Main {
+    public static void main(String[] args) {
+        String[][] path = {{"Start", "Path", "Trap"}, {"Trap", "Path", "End"}};
+        Labyrinth labyrinth = new Labyrinth(path);
+
+        int currentRow = 0;
+        int currentCol = 0;
+
+        while (true) {
+            String currentCell = labyrinth.path[currentRow][currentCol];
+
+            if (currentCell.equals("End")) {
+                System.out.println("Congratulations! You reached the end of the labyrinth.");
+                break;
+            }
+
+            System.out.println("Current position: Row " + currentRow + ", Column " + currentCol + " - " + currentCell);
+
+            if (currentCell.equals("Trap")) {
+                System.out.println("Oops, you fell into a trap!");
+                break;
+            }
+
+            if (currentCell.equals("Start")) {
+                System.out.println("You are at the starting point.");
+            }
+
+            // Move to the next cell (rightwards or downwards)
+            if (currentCol < labyrinth.path[0].length - 1) {
+                currentCol++;
+            } else if (currentRow < labyrinth.path.length - 1) {
+                currentRow++;
+            } else {
+                System.out.println("You are stuck in the labyrinth.");
+                break;
+            }
+        }
+    }
+}
+
+Lesson 3: Bypassing Security Systems
+
+interface SecuritySystem {
+    boolean validate(String input);
+}
+
+class BiometricScanner implements SecuritySystem {
+    @Override
+    public boolean validate(String input) {
+        return true; //Bypass the security system
+    }
+}
+
+class PasswordLock implements SecuritySystem {
+    @Override
+    public boolean validate(String input) {
+       PasswordLock lock = new PasswordLock();
+         PasswordLock lock = new PasswordLock();
+        
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BiometricScanner scanner = new BiometricScanner();
+       scanner = bypass; //Bypass the scanner security system
+}
+}
+
+esson 4: Retrieving the Stolen Dog Food
+
+class StolenFood {
+    String location;
+    int quantity;
+
+    public StolenFood(String location, int quantity) {
+        this.location = location;
+        this.quantity = quantity;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        StolenFood food = new StolenFood("Vault", 100);
+        
+      // Mr. Bichon retrieves the stolen dog food
+        food.retrieveFood();
+    }
+}
