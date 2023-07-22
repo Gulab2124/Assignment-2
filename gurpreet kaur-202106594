@@ -210,7 +210,7 @@ public class Main {
 }
 }
 
-esson 4: Retrieving the Stolen Dog Food
+Lesson 4: Retrieving the Stolen Dog Food
 
 class StolenFood {
     String location;
